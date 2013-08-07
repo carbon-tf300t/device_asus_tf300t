@@ -15,10 +15,19 @@
 $(call inherit-product-if-exists, vendor/asus/tf300t/tf300t-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/asus/tf300t/overlay
+
+# Prebuilt kernel location
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+        LOCAL_KERNEL := device/asus/tf300t/kernel
+else
+        LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
 #TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Files needed for boot image
 PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel \
     $(LOCAL_PATH)/ramdisk/init.cardhu.rc:root/init.cardhu.rc \
     $(LOCAL_PATH)/ramdisk/init.tf.rc:root/init.tf.rc \
     $(LOCAL_PATH)/ramdisk/ueventd.cardhu.rc:root/ueventd.cardhu.rc \
@@ -114,3 +123,9 @@ $(call inherit-product, frameworks/native/build/tablet-dalvik-heap.mk)
 
 # Copy bcm4329 firmware
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
+
+# Discard inherited values and use our own instead.
+PRODUCT_NAME := carbon_tf300t
+PRODUCT_DEVICE := tf300t
+PRODUCT_BRAND := Asus
+PRODUCT_MODEL := TF300T

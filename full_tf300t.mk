@@ -23,7 +23,10 @@ PRODUCT_AAPT_CONFIG := normal mdpi hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := full_tf300t
+PRODUCT_NAME := carbon_tf300t
 PRODUCT_DEVICE := tf300t
 PRODUCT_BRAND := Asus
 PRODUCT_MODEL := TF300T
+
+# Don't restrict vendor folder
+PRODUCT_RESTRICT_VENDOR_FILES := false
